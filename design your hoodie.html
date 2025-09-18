@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Editor</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+
+    .editor-container {
+      display: flex;
+      height: 100vh;
+      background: white;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #fff;
+      border-right: 1px solid #ddd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0;
+    }
+    .sidebar button {
+      background: none;
+      border: none;
+      padding: 12px;
+      margin: 6px 0;
+      cursor: pointer;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sidebar button:hover {
+      background: #f0f0f0;
+      border-radius: 8px;
+    }
+
+    /* Main Editor */
+    .main-editor {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .upload-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 40px;
+      text-align: center;
+      color: #999;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .upload-box input {
+      display: none;
+    }
+    .upload-box label {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #8c52ff;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    /* Toolbar on right */
+    .toolbar {
+      position: absolute;
+      right: 30px;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .toolbar button {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: none;
+      background: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    /* Color picker */
+    .color-options {
+      display: flex;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .color-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      cursor: pointer;
+    }
+
+    /* Fullscreen button */
+    .fullscreen-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 18px;
+      background: #8c52ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .fullscreen-btn:hover {
+      background: #6a3bcc;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .editor-container {
+        flex-direction: column;
+      }
+      .sidebar {
+        flex-direction: row;
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="editor-container" id="editor">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <button>✏️ Edit</button>
+      <button>📦 Models</button>
+      <button>✨ AI Design</button>
+      <button>🖼️ AI Background</button>
+      <button>🎥 Videos</button>
+      <button>⋯ More</button>
+    </div>
+
+    <!-- Main Editor -->
+    <div class="main-editor">
+      <h2>Upload images</h2>
+      <div class="upload-box">
+        <p>362 x 422 px</p>
+        <input type="file" id="fileUpload" accept="image/*">
+        <label for="fileUpload">⬆ Upload</label>
+      </div>
+
+      <p><strong>No image yet? Try AI design ✨</strong></p>
+
+      <div>
+        <h4>Color</h4>
+        <div class="color-options">
+          <button class="color-btn" style="background: white;"></button>
+          <button class="color-btn" style="background: black;"></button>
+          <button class="color-btn" style="background: gray;"></button>
+          <button class="color-btn" style="background: red;"></button>
+          <button class="color-btn" style="background: blue;"></button>
+          <button class="color-btn" style="background: green;"></button>
+        </div>
+      </div>
+
+      <p><strong>Custom material</strong>: Cotton base</p>
+      <p><strong>Custom part</strong>: 5 Parts</p>
+      <p><strong>Find similar with AI</strong></p>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <button title="Select">🖱️</button>
+      <button title="Move">✋</button>
+      <button title="Undo">↩️</button>
+      <button title="Redo">↪️</button>
+    </div>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" id="fullscreenBtn">⛶ Fullscreen</button>
+  </div>
+
+  <script>
+    // Fullscreen toggle
+    const editor = document.getElementById("editor");
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
+
+    fullscreenBtn.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        editor.requestFullscreen().catch(err => {
+          alert(`Error attempting fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    });
+  </script>
+</body>
+</html>
